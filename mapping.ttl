@@ -1,0 +1,56 @@
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbp: <http://dbpedia.org/property/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ex: <http://example.com/> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@base <http://example.com/> .
+
+
+<TriplesMapWHOSuicide>
+  a rr:TriplesMap;
+    # Datasource
+    rml:logicalSource [
+        rml:source "Datasets/WHO_Suicide_Statistics/who_suicide_statistics.csv" ;
+        rml:referenceFormulation ql:CSV 
+    ] ;
+
+    # Subject
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/page/{country}/{year}/{population}" ;
+        rr:class dbo:Country
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rml:reference "country" ; rr:datatype xsd:string ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate dbo:year ;
+        rr:objectMap [ rml:reference "year" ; rr:datatype xsd:integer ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate dbo:age ;
+        rr:objectMap [ rml:reference "age" ; rr:datatype xsd:string]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate dbo:sex ;
+        rr:objectMap [ rml:reference "sex" ; rr:datatype xsd:string ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate ex:totalSuicide ;
+        rr:objectMap [ rml:reference "suicides_no" ; rr:datatype xsd:integer ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate dbo:population ;
+        rr:objectMap [ rml:reference "population" ; rr:datatype xsd:integer ]
+    ] ;
+    .
